@@ -1,64 +1,31 @@
-const title = document.getElementById("title");
-const hellos = document.querySelector(".hello");
-const title2 = document.querySelector("div h2");
-const title3 = document.querySelector("div h3");
+const loginInput = document.querySelector("#login-form input");
+const loginForm = document.querySelector("#login-form");
 
-console.log(title);
-console.log(hellos);
-console.log(title2);
-console.log(title3);
+const greeting = document.querySelector("#greeting");
+const HIDDEN_CLASSNAME = "hidden";
+const USERNAME_KEY = "username";
 
-currentColor = "green";
-title2.style.color = "blue";
 
-function handleTitileClick(){
-    const clickedClass = "clicked";
-    if(title.classList.contains(clickedClass)){
-        title.classList.remove(clickedClass);
-    }else{
-        title.classList.add(clickedClass);
-    }
+function onLoginSubmit(event){
+    event.preventDefault();
+    loginForm.classList.add(HIDDEN_CLASSNAME);
+    const username = loginInput.value;
+    localStorage.setItem(USERNAME_KEY, username);
+    paintGreetings();
 }
-function handleTitileClick2(){
-    const clickedClass = "clicked";
-    if(hellos.classList.contains(clickedClass)){
-        hellos.classList.remove(clickedClass);
-    }else{
-        hellos.classList.add(clickedClass);
-    }
+
+function paintGreetings(){
+    const username = localStorage.getItem(USERNAME_KEY);
+    greeting.innerText = "Hello " + username;
+    greeting.classList.remove(HIDDEN_CLASSNAME);
 }
-title.addEventListener("click", handleTitileClick);
-hellos.addEventListener("click", handleTitileClick2);
-function handleMouseEnter( ){
-    title.innerText = "Mouse is here";
+
+const savedUsername = localStorage.getItem(USERNAME_KEY);
+
+
+if(savedUsername === null){
+    loginForm.classList.remove(HIDDEN_CLASSNAME);
+    loginForm.addEventListener("submit", onLoginSubmit);
+}else{
+    paintGreetings();
 }
-title.addEventListener("mouseenter", handleMouseEnter);
-
-function handleMouseLeave( ){
-    title.innerText = "Mouse is gone";
-}
-title.addEventListener("mouseleave", handleMouseLeave);
-
-function handleWindowResize(){
-    document.body.style.backgroundColor = "tomato";
-}
-window.addEventListener("resize", handleWindowResize);
-
-function handleWindowCopy(){
-    alert("copier");
-}
-window.addEventListener("copy", handleWindowCopy);
-
-function handleWindowOffLine(){
-    alert("off wifi");
-}
-function handleWindowOnLinke(){
-    alert("on wifi");
-}
-window.addEventListener("offline", handleWindowOffLine);
-window.addEventListener("online", handleWindowOnLinke);
-
-
-
-
-
