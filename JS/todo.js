@@ -31,10 +31,11 @@ function paintToDo(newToDoObj){
     toDoList.appendChild(li);
 }
 
-function deleteToDo(event){
+function deleteToDo(event){ 
     const li = event.target.parentElement;
     li.remove();
-    console.log(li.id);
+    toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
+    saveToDos();
 }
 
 function saveToDos(){
